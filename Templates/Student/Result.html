@@ -1,0 +1,190 @@
+{% extends "../Base.html" %} {% block body_block %} {% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/Add_student.css'  %}" />
+</head>
+<div class="jumbotron">
+    <strong>
+        <h2 style="text-align: center;">Result &nbsp; &nbsp; &nbsp; <a href="{% url 'Student_Dashboard' %}"
+                class="btn btn-primary"><i class="fa fa-home" aria-hidden="true"></i>Home</a> </h2>
+    </strong>
+
+</div>
+<div class="container" style="margin-left: 15%;">
+
+
+    {% if FA_Result %}
+    <h3><strong class="text-dark">FA Result</strong></h3>
+
+
+    <table class="table" id='myTable'>
+        <thead class="grey lighten-2">
+            <tr>
+                <th>Subject</th>
+                <th>Term</th>
+                <th>Marks Obtained</th>
+                <th>Maximum Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ResultFA in FA_Result  %}
+            <tr>
+                <td>{{ResultFA.Subject}}</td>
+                <td>{{ResultFA.Term}}</td>
+                <td>{{ResultFA.Marks}}</td>
+                <td>{{ResultFA.Maximum_Marks}}</td>
+            </tr>
+
+
+
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <br>
+    <br>
+
+    {% if SA_Result %}
+    <h3><strong class="text-dark">SA Result</strong></h3>
+
+    <table class="table" id="myTable1">
+        <thead class="grey lighten-2">
+            <tr>
+                <th>Subject</th>
+                <th>Term</th>
+                <th>Marks Obtained</th>
+                <th>Maximum Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ResultSA in SA_Result  %}
+            <tr>
+                <td>{{ResultSA.Subject}}</td>
+                <td>{{ResultSA.Term}}</td>
+                <td>{{ResultSA.Marks}}</td>
+                <td>{{ResultSA.Maximum_Marks}}</td>
+            </tr>
+
+
+
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    <br>
+    <br>
+    {% if ClassTest_Result %}
+
+    <h3><strong class="text-dark">Class Test Result</strong></h3>
+
+
+    <table class="table" id='myTable2'>
+        <thead class="grey lighten-2">
+            <tr>
+                <th>Subject</th>
+                <th>Marks Obtained</th>
+                <th>Maximum Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ClassTest in ClassTest_Result  %}
+            <tr>
+                <td>{{ClassTest.Subject}}</td>
+                <td>{{ClassTest.Marks}}</td>
+                <td>{{ClassTest.Maximum_Marks}}</td>
+            </tr>
+
+
+
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+
+</div>
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+
+
+        <ul class="list-unstyled components">
+
+
+            <li class="active">
+                <a href="{% url 'Student_module:Notes' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;
+                    Notes</a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:Profile_Info' %}" class="btn  btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i> &nbsp;
+                    Profile</a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:Result' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Result
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:Syllabus' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Syllabus
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:Assignment' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Assignment
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:Show_Attendance' %} " class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;
+                    Attendance
+                </a>
+            </li>
+
+
+            <li class="active">
+                <a href="{% url 'Student_module:Exam' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Exam
+                    Schedule </a>
+            </li>
+
+
+            <li class="active">
+                <a href="{% url 'Student_module:Teacher_Feedback' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Teacher FeedBack
+                </a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Student_module:FeeDetails' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Fee Management
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        console.log($('#myTable'))
+        $.noConflict();
+        $('#myTable').DataTable();
+        $('#myTable1').DataTable();
+        $('#myTable2').DataTable();
+    });
+</script>
+
+{% endblock body_block %}

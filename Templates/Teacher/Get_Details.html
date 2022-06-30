@@ -1,0 +1,108 @@
+{% extends "../Base.html" %} {% block body_block %} {% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/Add_student.css'  %}" />
+</head>
+<div class="container" style="margin-left: 15%;">
+    <div class="jumbotron">
+        <h2 style="text-align: center;"> Details </h2>
+        <br>
+        <form method="POST" class="form">
+            {% csrf_token %}
+            <label for="Subject">Subject:-</label>
+            <select name="Subject" class="dropdown ">
+                {% for Sub in Subject  %}
+                <option value={{Sub}}>{{Sub}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <br>
+            <label for="Class">Class:-</label>
+            <select name="Class" class="dropdown">
+                {% for Cl in Class  %}
+                <option value={{Cl}}>{{Cl}}</option>
+
+                {% endfor %}
+            </select>
+            <br>
+            <br>
+            <label for="Section">Section:-</label>
+            <select name="Section" class="dropdown">
+                {% for Sec in Section  %}
+                <option value={{Sec}}>{{Sec}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <br>
+            <input type="submit" value="Next" class="btn btn-primary">
+        </form>
+    </div>
+
+</div>
+
+
+
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+
+
+        <ul class="list-unstyled components">
+            {% if class_teacher %}
+            <li class="active">
+                <a href="{% url 'Teacher_module:Add_Notes' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Notes</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Teacher_module:Assignment' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Assignment</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Teacher_module:Syllabus' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Set Syllabus</a>
+            </li>
+
+            <li class="active">
+                <a href="{%  url 'Teacher_module:Get_Details' %}" class="btn  btn-simple"><i class="fa fa-upload"
+                        aria-hidden="true"></i> &nbsp;Upload Marks </a>
+            </li>
+
+
+            <li class="active">
+                <a href="{%  url 'Teacher_module:Show_Info' %}" class="btn  btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i> &nbsp; Details of Student</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Teacher_module:Attendance_Date' %} " class="btn  btn-simple"><i class="fa fa-upload"
+                        aria-hidden="true"></i> &nbsp; Upload Attendance
+                </a>
+            </li>
+
+
+            {% else %}
+            <li class="active">
+                <a href="{% url 'Teacher_module:Add_Notes' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Notes</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Teacher_module:Assignment' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Assignment</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Teacher_module:Syllabus' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Set Syllabus</a>
+            </li>
+            <li class="active">
+                <a href="{%  url 'Teacher_module:Get_Details' %}" class="btn  btn-simple"><i class="fa fa-upload"
+                        aria-hidden="true"></i> &nbsp;Upload Marks </a>
+            </li>
+
+
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+
+{% endblock body_block %}

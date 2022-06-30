@@ -1,0 +1,252 @@
+{% extends "../Base.html" %} {% block body_block %} {% load crispy_forms_tags %}
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/Add_student.css'  %}" />
+</head>
+<div class="jumbotron">
+    <br>
+    <h2>Student Details &nbsp; &nbsp; &nbsp; <a href="{% url 'Admin_Dashboard' %}" class="btn btn-primary"><i
+                class="fa fa-home" aria-hidden="true"></i> Home </a> </h2>
+    <!-- <form class="form" method="POST">
+        {% csrf_token %}-->
+    <div class="container" style="margin-left: 15%;">
+        <label for="Class">Class:-</label>
+        <input type="number" name="Class" size="10" max=12 , min=1 id='class'>
+        <input type="button" value="Show" class="btn btn-primary" id='get'>
+        <!-- </form> -->
+    </div>
+</div>
+
+<div class='container' style="margin-left: 15%;">
+
+
+    <table class="table" id="myTable">
+        <thead class="grey lighten-2">
+            <tr>
+                <!-- <th scope="col">
+                    Photo
+                </th> -->
+                <th scope="col">Username </th>
+                <th scope="col">Name</th>
+                <th scope="col">Class</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <!-- {% for Student in  General_Info %}
+            <tr>
+                <td><img src="{{Student.Photo.url}}" alt="Photo" style="height: 100px;width:100px;border-radius: 20%;">
+                </td>
+                <td>{{Student.Student_ID}}</td>
+                <td>{{Student.Name}}</td>
+                <td>{{Student_Class}}</td>
+                <td><input type="button" id='{{Student.Student_ID}}' value="Delete" class="btn btn-danger del"
+                        data-toggle="modal" data-target="#exampleModal"></td>
+            </tr>
+
+            {% endfor %} -->
+        </tbody>
+
+    </table>
+</div>
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+
+
+        <ul class="list-unstyled components">
+
+            <li class="active">
+                <a href="{% url 'Admin_module:Create_Student' %}" class="btn btn-simple"><i class="fa fa-user"
+                        aria-hidden="true"></i>&nbsp;Add Student</a>
+
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Create_Teacher' %}" class="btn btn-simple"><i class="fa fa-user"
+                        aria-hidden="true"></i>&nbsp;Add Teacher</a>
+
+
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Schedule_Exam' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Exam Schedule</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:TeacherDetails' %}" class="btn btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i>&nbsp;Teacher Details</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:StudentDetails' %}" class="btn btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i>&nbsp;Student Details</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Feedback' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Feedback </a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Upload_Notice' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Upload Notice</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:FeeDetails' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Fee Management</a>
+            </li>
+        </ul>
+
+
+    </nav>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Warning!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are You Sure??
+                </div>
+                <div class="modal-footer">
+                    <!-- {% csrf_token %} -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="delete" class="btn btn-warning" data-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </div>
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Record</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                 {% csrf_token %} 
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="delete" class="btn btn-success" data-dismiss="modal">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div> -->
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+
+        // $(document).ready(function () {
+        //     console.log($('#myTable'))
+        //     $.noConflict();
+        //     $('#myTable').DataTable();
+        // });
+
+
+
+        // })
+        $(document).ready(function () {
+
+            $.noConflict();
+
+            var table = $('#myTable').DataTable();
+            $('#get').click(function () {
+                //console.log($('#Subject').val())
+
+                table.clear().draw();
+                $.ajax({
+                    type: "GET",
+                    url: "../get_data",
+                    data: { "class": $('#class').val() },
+                    success: function (data) {
+                        console.log(data)
+
+                        for (i = 0; i < data.length; ++i) {
+
+                            table.row.add([
+                                data[i].pk,
+                                data[i].fields.Name,
+                                $('#class').val(),
+                                "<input type='button' class='btn btn-danger del' value='Delete' id=" + data[i].pk + " data-toggle='modal' data-target='#exampleModal' >  ",
+
+                            ]).draw();
+
+                            //     $('#tbody').append(function (n) {
+                            //         return "<tr > <td>" + data[i].pk + "</td> <td>" + data[i].fields.Name + "</td><td>" + $('#class').val() + "</td> <td><input type='button' id=" + data[i].pk + " value='Delete' class='btn btn-danger del'></td> </tr>"
+                            //     })
+                            //          $('.class').append('<option value=' + data[i] + '>' + data[i] + '</option>')
+                        }
+
+                    }
+                }
+                )
+
+
+            });
+            // $('.del').click(function () {
+            //     console.log("Kaushal");
+            //     var value = event.target.id;
+            //     console.log(event.target.id);
+            //     // $('.modal-footer').append(function (n) {
+            //     //     return `<input type='hidden' value=${value} name='delete-val' class='h'>`
+            //     // })
+
+            // })
+        });
+        $('#myTable tbody').on('click', '.del', function () {
+            // console.log('Kaushal');
+            var table = $('#myTable').DataTable();
+            console.log(event.target.id);
+            var value = event.target.id;
+            // // console.log(event.target.id);
+            // $('.modal-footer').append(function (n) {
+            // return `<input type='hidden' value=${value} name='delete-val' class='h'>`
+            // })
+            $('#delete').click(function () {
+                table.clear().draw();
+                $.ajax({
+                    type: "GET",
+                    url: "../after_delete",
+                    data: { "username": `${value}` },
+                    success: function (data) {
+                        console.log(data)
+
+                        for (i = 0; i < data.length; ++i) {
+
+                            table.row.add([
+                                data[i].pk,
+                                data[i].fields.Name,
+                                $('#class').val(),
+                                "<input type='button' class='btn btn-danger del' value='Delete' id=" + data[i].pk + " data-toggle='modal' data-target='#exampleModal' >"
+                            ]).draw();
+
+                            //     $('#tbody').append(function (n) {
+                            //         return "<tr > <td>" + data[i].pk + "</td> <td>" + data[i].fields.Name + "</td><td>" + $('#class').val() + "</td> <td><input type='button' id=" + data[i].pk + " value='Delete' class='btn btn-danger del'></td> </tr>"
+                            //     })
+                            //          $('.class').append('<option value=' + data[i] + '>' + data[i] + '</option>')
+                        }
+
+                    }
+                }
+                )
+            })
+
+        })
+
+
+    </script>
+
+    {% endblock body_block %}

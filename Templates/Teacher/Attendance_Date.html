@@ -1,0 +1,129 @@
+{% extends "../Base.html" %} {% block body_block %} {% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/Add_student.css'  %}" />
+</head>
+<div class="jumbotron">
+    <br>
+    <strong>
+        <h2 style="text-align: center;">Upload Attendance &nbsp; &nbsp; &nbsp; <a href="{% url 'Teacher_Dashboard' %}"
+                class="btn btn-primary"><i class="fa fa-home" aria-hidden="true"></i>Home</a> </h2>
+    </strong>
+
+</div>
+<div class="container" style="margin-left: 15% !important;">
+
+
+
+    <form method='POST' class="form">
+        {% csrf_token %}
+
+
+        <table class="table" id='myTable'>
+            <thead class="grey lighten-2">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Date in Dates  %}
+                <tr>
+                    <td>{{Date}}</td>
+                    <td><input type="submit" value="Mark Attendance" class="btn btn-primary date" id={{Date}}></td>
+                </tr>
+
+
+
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </form>
+</div>
+
+
+
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+
+
+        <ul class="list-unstyled components">
+            {% if class_teacher %}
+            <li class="active">
+                <a href="{% url 'Teacher_module:Add_Notes' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Notes</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Teacher_module:Assignment' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Assignment</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Teacher_module:Syllabus' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Set Syllabus</a>
+            </li>
+
+            <li class="active">
+                <a href="{%  url 'Teacher_module:Get_Details' %}" class="btn  btn-simple"><i class="fa fa-upload"
+                        aria-hidden="true"></i> &nbsp;Upload Marks </a>
+            </li>
+
+
+            <li class="active">
+                <a href="{%  url 'Teacher_module:Show_Info' %}" class="btn  btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i> &nbsp; Details of Student</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Teacher_module:Attendance_Date' %} " class="btn  btn-simple"><i class="fa fa-upload"
+                        aria-hidden="true"></i> &nbsp; Upload Attendance
+                </a>
+            </li>
+
+
+            {% else %}
+            <li class="active">
+                <a href="{% url 'Teacher_module:Add_Notes' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Notes</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Teacher_module:Assignment' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Assignment</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Teacher_module:Syllabus' %}" class="btn btn-simple"> <i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;Set Syllabus</a>
+            </li>
+            <li class="active">
+                <a href="{%  url 'Teacher_module:Get_Details' %}" class="btn  btn-simple"><i class="fa fa-upload"
+                        aria-hidden="true"></i> &nbsp;Upload Marks </a>
+            </li>
+
+
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.date').click(function () {
+            var value = event.target.id
+            $('.form').append(function () {
+                return `<input type='hidden' name='date' value=${value} >`
+            })
+        })
+    })
+
+</script>
+
+{% endblock body_block   %}

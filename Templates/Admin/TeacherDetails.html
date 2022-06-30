@@ -1,0 +1,151 @@
+{% extends "../Base.html" %} {% block body_block %} {% load crispy_forms_tags %}
+{% load static %}
+
+<head>
+
+    <link rel="stylesheet" href="{% static 'css/Add_student.css'  %}" />
+
+
+
+
+
+</head>
+
+
+<div class="jumbotron">
+    <br>
+    <h2>Teacher Details &nbsp; &nbsp; &nbsp; <a href="{% url 'Admin_Dashboard' %}" class="btn btn-primary"><i
+                class="fa fa-home" aria-hidden="true"></i> Home </a> </h2>
+
+</div>
+
+<div class='container' style="margin-left: 15%;">
+
+    <table class="table display" id="myTable">
+        <thead class="grey lighten-2">
+            <tr>
+                <th scope="col">
+                    Photo
+                </th>
+                <th scope="col">Username </th>
+                <th scope="col">Name</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for Teacher in  General_Info %}
+            <tr>
+                <td><img src="{{Teacher.Photo.url}}" alt="Photo" style="height: 100px;width:100px;border-radius: 20%;">
+                </td>
+                <td>{{Teacher.Teacher_ID}}</td>
+                <td>{{Teacher.Name}}</td>
+                <td><input type="button" id='{{Teacher.Teacher_ID}}' value="Delete" class="btn btn-danger del"
+                        data-toggle="modal" data-target="#exampleModal">
+                    <!-- <input type="button" value="Update" class="btn btn-primary update" id='{{Teacher.Teacher_ID}}'> -->
+                </td>
+                <!-- <input type="hidden" id="del" value="{{Teacher.Teacher_ID}}"> -->
+            </tr>
+
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+
+
+        <ul class="list-unstyled components">
+
+            <li class="active">
+                <a href="{% url 'Admin_module:Create_Student' %}" class="btn btn-simple"><i class="fa fa-user"
+                        aria-hidden="true"></i>&nbsp;Add Student</a>
+
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Create_Teacher' %}" class="btn btn-simple"><i class="fa fa-user"
+                        aria-hidden="true"></i>&nbsp;Add Teacher</a>
+
+
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Schedule_Exam' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Exam Schedule</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:TeacherDetails' %}" class="btn btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i>&nbsp;Teacher Details</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:StudentDetails' %}" class="btn btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i>&nbsp;Student Details</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Feedback' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Feedback </a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Upload_Notice' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Upload Notice</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:FeeDetails' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Fee Management</a>
+            </li>
+
+        </ul>
+
+
+    </nav>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Warning!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are You Sure??
+                </div>
+                <form method="POST" class="modal-footer">
+                    {% csrf_token %}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        console.log($('#myTable'))
+        $.noConflict();
+        $('#myTable').DataTable();
+    });
+
+    $('.del').click(function () {
+        var value = event.target.id;
+        $('.modal-footer').append(function (n) {
+            return `<input type='hidden' value=${value} name='delete-val' class='h'>`
+        })
+
+    })
+        //console.log($('.h').val())
+</script>
+
+
+{% endblock body_block %}

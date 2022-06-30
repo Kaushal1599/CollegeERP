@@ -1,0 +1,96 @@
+{% extends "../Base.html" %} {% block body_block %} {% load crispy_forms_tags %}
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/Add_student.css'  %}" />
+</head>
+<div class="jumbotron">
+    <br>
+    <h2>Upload Notice &nbsp; &nbsp; &nbsp; <a href="{% url 'Admin_Dashboard' %}" class="btn btn-primary"><i
+                class="fa fa-home" aria-hidden="true"></i> Home </a> </h2>
+
+</div>
+<div class="container" style="margin-left: 15%;">
+
+
+
+
+
+    <form method="POST" class="form-group" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=1 name="Student">
+            <label class="form-check-label" for="Student">
+                Student
+            </label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input class="form-check-input" type="checkbox" value=1 name="Teacher">
+            <label class="form-check-label" for="Teacher">
+                Teacher
+            </label>
+        </div>
+        <br><br>
+        <textarea name="Notice" rows="5" class="form-control"></textarea>
+        <small class="form-text text-muted">Write the Notice in the Block</small>
+        <br>
+        <strong>OR</strong>
+        <br><br>
+        <input type="file" name="file" id="">
+        <br>
+        <br>
+        <input type="submit" value="Upload" class="btn btn-primary" />
+    </form>
+
+</div>
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+
+
+        <ul class="list-unstyled components">
+
+            <li class="active">
+                <a href="{% url 'Admin_module:Create_Student' %}" class="btn btn-simple"><i class="fa fa-user"
+                        aria-hidden="true"></i>&nbsp;Add Student</a>
+
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Create_Teacher' %}" class="btn btn-simple"><i class="fa fa-user"
+                        aria-hidden="true"></i>&nbsp;Add Teacher</a>
+
+
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Schedule_Exam' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Exam Schedule</a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Admin_module:TeacherDetails' %}" class="btn btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i>&nbsp;Teacher Details</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:StudentDetails' %}" class="btn btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i>&nbsp;Student Details</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Feedback' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Feedback </a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Upload_Notice' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Upload Notice</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:FeeDetails' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Fee Management</a>
+            </li>
+        </ul>
+
+
+    </nav>
+</div>
+
+
+{% endblock body_block %}

@@ -1,0 +1,145 @@
+{% extends "../Base.html" %} {% block body_block %} {% load crispy_forms_tags %}
+{% load static %}
+<div class="jumbotron">
+  <br>
+  <h2 style="color: white;">Register Teacher &nbsp; &nbsp; &nbsp; <a href="{% url 'Admin_Dashboard' %}"
+      class="btn btn-primary"><i class="fa fa-home" aria-hidden="true"></i> Home </a> </h2>
+
+</div>
+
+
+
+
+<div class="container" style="margin-left: 15% !important;">
+
+  <head>
+    <link rel="stylesheet" href="{% static 'css/Add_student.css'  %}" />
+  </head>
+
+
+
+
+
+  <form method="POST" class="form-group" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ Teacher.Name|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ Teacher.Teacher_Phone_Number|as_crispy_field }}
+      </div>
+
+    </div>
+    {{Teacher.Address|as_crispy_field}}
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ Teacher.Photo|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ Teacher.email|as_crispy_field }}
+      </div>
+    </div>
+    {{Teacher.Qualification|as_crispy_field}}
+
+    <div class="form-row" id="items">
+      <input type="text" name="Subject[]" size="40" placeholder="Subject" />
+      <input type="text" name="Class[]" placeholder="Class" size="40" />
+      <input type="text" name="Section[]" placeholder="Section" size="40" />
+    </div>
+    <br />
+    <input type="button" name="Add" value="Add" class="btn btn-primary" id="Add" />
+
+    <div class="form-check" id="class">
+      <br />
+      <input class="form-check-input" type="checkbox" id="gridCheck" />
+      <label class="form-check-label" for="gridCheck">
+        Class Teacher
+      </label>
+    </div>
+    <br />
+    <input type="submit" value="Register" class="btn btn-primary" />
+  </form>
+
+</div>
+
+<div class="wrapper">
+  <!-- Sidebar Holder -->
+  <nav id="sidebar">
+
+
+    <ul class="list-unstyled components">
+
+      <li class="active">
+        <a href="{% url 'Admin_module:Create_Student' %}" class="btn btn-simple"><i class="fa fa-user"
+            aria-hidden="true"></i>&nbsp;Add Student</a>
+
+      </li>
+      <li class="active">
+        <a href="{% url 'Admin_module:Create_Teacher' %}" class="btn btn-simple"><i class="fa fa-user"
+            aria-hidden="true"></i>&nbsp;Add Teacher</a>
+
+
+      </li>
+      <li class="active">
+        <a href="{% url 'Admin_module:Schedule_Exam' %}" class="btn btn-simple"><i class="fa fa-file"
+            aria-hidden="true"></i>&nbsp;Exam Schedule</a>
+      </li>
+      <li class="active">
+        <a href="{% url 'Admin_module:TeacherDetails' %}" class="btn btn-simple"><i class="fa fa-info"
+            aria-hidden="true"></i>&nbsp;Teacher Details</a>
+      </li>
+      <li class="active">
+        <a href="{% url 'Admin_module:StudentDetails' %}" class="btn btn-simple"><i class="fa fa-info"
+            aria-hidden="true"></i>&nbsp;Student Details</a>
+      </li>
+      <li class="active">
+        <a href="{% url 'Admin_module:Feedback' %}" class="btn btn-simple"><i class="fa fa-file"
+            aria-hidden="true"></i>&nbsp;Feedback </a>
+      </li>
+      <li class="active">
+        <a href="{% url 'Admin_module:Upload_Notice' %}" class="btn btn-simple"><i class="fa fa-file"
+            aria-hidden="true"></i>&nbsp;Upload Notice</a>
+      </li>
+      <li class="active">
+        <a href="{% url 'Admin_module:FeeDetails' %}" class="btn btn-simple"><i class="fa fa-file"
+            aria-hidden="true"></i>&nbsp;Fee Management</a>
+      </li>
+
+    </ul>
+
+
+  </nav>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    var i = 0;
+    $("#Add").click(function (e) {
+      e.preventDefault();
+
+      $("#items").append(function (n) {
+        i = i + 1;
+        return (
+          "<div><input type='text' name='Subject[]' + size='40' placeholder='Subject'  /> <input type='text' size='40' name='Class[]' placeholder='Class'  /> <input type='text' size='40' name='Section[]' placeholder='Section'  />  " +
+          "<input type= 'button' value='Delete' id=delete class= 'btn btn-danger' /></div>"
+        );
+      });
+    });
+    $("body").on("click", "#delete", function (e) {
+      $(this).parent("div").remove();
+    });
+    $("#gridCheck").click(function (e) {
+      if ($(this).prop("checked") == true) {
+        $("#class").append(function (n) {
+          return "<div class='form-row'><input type='text' class='form-control' name='class_teacher[]' id= rem placeholder='Class'  /><input type='text' class='form-control' name='class_teacher[]' id= rem1 placeholder='Section'  /></div>";
+        });
+      } else if ($(this).prop("checked") == false) {
+        $("#rem").remove();
+        $("#rem1").remove();
+      }
+    });
+  });
+</script>
+{% endblock body_block %}

@@ -1,0 +1,129 @@
+{% extends "../Base.html" %} {% block body_block %} {% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/Add_student.css'  %}" />
+</head>
+<div class="jumbotron">
+    <br>
+    <strong>
+        <h2 style="text-align: center;">Syllabus &nbsp; &nbsp; &nbsp; <a href="{% url 'Student_Dashboard' %}"
+                class="btn btn-primary"><i class="fa fa-home" aria-hidden="true"></i>Home</a> </h2>
+    </strong>
+</div>
+<div class="container" style="margin-left: 15%;">
+
+
+
+    <table class="table" id="myTable">
+        <thead class="grey lighten-2">
+            <tr>
+                <th scope="col">Subject</th>
+                <th scope="col">Term</th>
+                <th scope="col">Syllabus</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for Detail in Details  %}
+            <tr>
+                {% if Detail.Syllabus == "None" %}
+                <td>{{Detail.Subject}}</td>
+                <td>{{Detail.Term}}</td>
+                <td><a href="{{Detail.File.url}}" download>Click Here to
+                        Download Syllabus</a></td>
+
+                {% else %}
+
+                <td>{{Detail.Subject}}</td>
+                <td>{{Detail.Term}}</td>
+                <td>{{Detail.Syllabus}}</td>
+
+            </tr>
+            {% endif %}
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+</div>
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+
+
+        <ul class="list-unstyled components">
+
+
+            <li class="active">
+                <a href="{% url 'Student_module:Notes' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;
+                    Notes</a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:Profile_Info' %}" class="btn  btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i> &nbsp;
+                    Profile</a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:Result' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Result
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:Syllabus' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Syllabus
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:Assignment' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Assignment
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:Show_Attendance' %} " class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp;
+                    Attendance
+                </a>
+            </li>
+
+
+            <li class="active">
+                <a href="{% url 'Student_module:Exam' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Exam
+                    Schedule </a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Student_module:Teacher_Feedback' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Teacher FeedBack
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Student_module:FeeDetails' %}" class="btn  btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i> &nbsp; Fee Management
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        console.log($('#myTable'))
+        $.noConflict();
+        $('#myTable').DataTable();
+        ;
+    });
+</script>
+{% endblock body_block %}

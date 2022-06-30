@@ -1,0 +1,89 @@
+{% extends "../Base.html" %} {% block body_block %} {% load crispy_forms_tags %}
+{% load static %}
+
+<div class="jumbotron">
+    <br>
+    <h2>Exam Schedule &nbsp; &nbsp; &nbsp; <a href="{% url 'Admin_Dashboard' %}" class="btn btn-primary"><i
+                class="fa fa-home" aria-hidden="true"></i> Home </a> </h2>
+
+</div>
+
+
+
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/Add_student.css'  %}" />
+</head>
+<div class="container" style="margin-left: 15%;">
+
+
+
+
+    <form method="POST" , enctype="multipart/form-data" class="form-group">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ ExamSchedule.Class|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ ExamSchedule.Term|as_crispy_field }}
+            </div>
+        </div>
+        {{ExamSchedule.Time_Table|as_crispy_field}}
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </form>
+
+</div>
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+
+
+        <ul class="list-unstyled components">
+
+            <li class="active">
+                <a href="{% url 'Admin_module:Create_Student' %}" class="btn btn-simple"><i class="fa fa-user"
+                        aria-hidden="true"></i>&nbsp;Add Student</a>
+
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Create_Teacher' %}" class="btn btn-simple"><i class="fa fa-user"
+                        aria-hidden="true"></i>&nbsp;Add Teacher</a>
+
+
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Schedule_Exam' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Exam Schedule</a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'Admin_module:TeacherDetails' %}" class="btn btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i>&nbsp;Teacher Details</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:StudentDetails' %}" class="btn btn-simple"><i class="fa fa-info"
+                        aria-hidden="true"></i>&nbsp;Student Details</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Feedback' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Feedback </a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:Upload_Notice' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Upload Notice</a>
+            </li>
+            <li class="active">
+                <a href="{% url 'Admin_module:FeeDetails' %}" class="btn btn-simple"><i class="fa fa-file"
+                        aria-hidden="true"></i>&nbsp;Fee Management</a>
+            </li>
+
+        </ul>
+
+
+    </nav>
+</div>
+
+
+{% endblock body_block %}
